@@ -39,7 +39,7 @@ namespace POSBOWeb.Services.Implementations
             var retData = new List<PrinterDTO>();
             try
             {
-                string query = $"select Distinct mp.POSLogicID, mp.Printer_Desc as Description,IIF(itp.ID is null, CAST (0 AS bit),CAST (1 AS bit)) IsItemPrinter from MstPOSPrinterPrep mp Left Join Fb_itemPrinter itp on itp.PrinterID=mp.PrimaryPrinterID and itp.ItemId={itemId}";
+                string query = $"select Distinct mp.POSLogicID, mp.Printer_Desc as Description,IIF(itp.ID is null, CAST (0 AS bit),CAST (1 AS bit)) IsItemPrinter from MstPOSPrinterPrep mp Left Join Fb_itemPrinter itp on itp.PrinterID=mp.POSLogicID and itp.ItemId={itemId}";
                 retData = _context.PrinterDTOs.FromSqlRaw(query).ToList();
 
             }
